@@ -35,6 +35,15 @@ jobs:
         git clone https://github.com/petroborys/VOYAGER-LINUX.git package/VOYAGER-LINUX
         ls -la
         
+    - name: Git clone repo
+      run: |
+        cd ${{ env.OPENWRT_SDK_DIR}}/package
+        mkdir VOYAGER-LINUX
+    - name: Git clone repo 2
+      uses: actions/checkout@v2
+      with:
+        repository: package/VOYAGER-LINUX
+        
     - name: Compile
       run: |
         cd ${{ env.OPENWRT_SDK_DIR}}
