@@ -22,8 +22,8 @@ jobs:
     - name: Install missing dependencies
       run: |
         sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe"
-        #sudo apt-get update
-        #sudo apt-get install libncurses5-dev       
+        sudo apt-get update
+        sudo apt-get install libncurses5-dev       
         
     - name: Preparing, configuring and building the necessary tools using a precompiled SDK
       run: |
@@ -33,10 +33,10 @@ jobs:
         ./scripts/feeds install libmosquitto
         make defconfig
 
-    - name: Create package dir
+    - name: Create project dir
       run: mkdir ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
       
-    - name: Checks-out your repository
+    - name: Checks-out repository
       uses: actions/checkout@v2
       with:
         path: ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
