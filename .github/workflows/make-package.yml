@@ -1,4 +1,8 @@
-# This is a workflow to make opkg package
+#----------------------------------------
+#
+# Workflow to make opkg package
+#
+#----------------------------------------
 
 name: Make-opkg-package
 env:
@@ -14,36 +18,30 @@ jobs:
     runs-on: ubuntu-18.04
     
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    #- uses: actions/checkout@v2
-      
-    - name: apt-get update
+
+    - name: Install missing dependencies
       run: |
         sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe"
-        sudo apt-get update
-        sudo apt-get install libncurses5-dev
+        #sudo apt-get update
+        #sudo apt-get install libncurses5-dev       
         
-        
-    - name: Download and decompressing the SDK archive
+    - name: Preparing, configuring and building the necessary tools using a precompiled SDK
       run: |
-        echo Download and decompressing the SDK archive:
         curl -SL https://downloads.openwrt.org/releases/19.07.3/targets/imx6/generic/${{ env.OPENWRT_SDK_DIR}}.tar.xz | tar xJ
         cd ${{ env.OPENWRT_SDK_DIR}}
         ./scripts/feeds update -a
         ./scripts/feeds install libmosquitto
         make defconfig
-        #git clone https://github.com/petroborys/VOYAGER-LINUX.git package/VOYAGER-LINUX
-        #ls -la
-        
+
     - name: Create package dir
       run: mkdir ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
       
-    - name: Git clone repo
+    - name: Checks-out your repository
       uses: actions/checkout@v2
       with:
         path: ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
         
-    - name: Compile
+    - name: Compile OpenWrt project
       run: |
         cd ${{ env.OPENWRT_SDK_DIR}}
         make package/VOYAGER-LINUX/compile
