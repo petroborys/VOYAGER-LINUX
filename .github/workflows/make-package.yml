@@ -34,4 +34,6 @@ jobs:
         ls -la
         
     - name: Compile
-      run: make package/VOYAGER-LINUX/compile
+      run: |
+        ls -la
+        #make package/VOYAGER-LINUX/compile
