@@ -1,6 +1,8 @@
 # This is a workflow to make opkg package
 
 name: Make-opkg-package
+env:
+  OPENWRT_SDK_DIR: "openwrt-sdk-19.07.3-imx6_gcc-7.5.0_musl_eabi.Linux-x86_64"
 
 on:
   push:
@@ -25,8 +27,8 @@ jobs:
     - name: Download and decompressing the SDK archive
       run: |
         echo Download and decompressing the SDK archive:
-        curl -SL https://downloads.openwrt.org/releases/19.07.3/targets/imx6/generic/openwrt-sdk-19.07.3-imx6_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz | tar xJ
-        cd openwrt-sdk-19.07.3-imx6_gcc-7.5.0_musl_eabi.Linux-x86_64
+        curl -SL https://downloads.openwrt.org/releases/19.07.3/targets/imx6/generic/${{ env.OPENWRT_SDK_DIR}}.tar.xz | tar xJ
+        cd ${{ env.OPENWRT_SDK_DIR}}
         ./scripts/feeds update -a
         ./scripts/feeds install libmosquitto
         make defconfig
@@ -35,5 +37,5 @@ jobs:
         
     - name: Compile
       run: |
-        cd openwrt-sdk-19.07.3-imx6_gcc-7.5.0_musl_eabi.Linux-x86_64
+        cd ${{ env.OPENWRT_SDK_DIR}}
         make package/VOYAGER-LINUX/compile
