@@ -19,6 +19,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install gawk zlib1g libncurses5 g++ flex
+        aptitude install zlib1g-dev
         
         
     - name: Download and decompressing the SDK archive
