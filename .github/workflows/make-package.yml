@@ -42,7 +42,7 @@ jobs:
     - name: Git clone repo 2
       uses: actions/checkout@v2
       with:
-        path: package/VOYAGER-LINUX
+        path: ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
         
     - name: Compile
       run: |
