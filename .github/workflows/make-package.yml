@@ -35,5 +35,5 @@ jobs:
         
     - name: Compile
       run: |
-        ls -la
-        #make package/VOYAGER-LINUX/compile
+        cd openwrt-sdk-19.07.3-imx6_gcc-7.5.0_musl_eabi.Linux-x86_64
+        make package/VOYAGER-LINUX/compile
