@@ -29,9 +29,9 @@ jobs:
         cd openwrt-sdk-19.07.3-imx6_gcc-7.5.0_musl_eabi.Linux-x86_64
         ./scripts/feeds update -a
         ./scripts/feeds install libmosquitto
-        ls -la
         make defconfig
         git clone https://github.com/petroborys/VOYAGER-LINUX.git package/VOYAGER-LINUX
+        ls -la
         
     - name: Compile
       run: make package/VOYAGER-LINUX/compile
