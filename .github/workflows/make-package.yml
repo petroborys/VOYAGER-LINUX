@@ -14,16 +14,16 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     #- uses: actions/checkout@v2
-
-    # Runs a single command using the runners shell
-    #- name: Run a one-line script
-    #  run: echo Hello, world!
       
+    - name: apt-get update
+      run: |
+        sudo apt-get update
+        sudo apt-get install gawk zlib1g libncurses5 g++ flex
+        
+        
     - name: Download and decompressing the SDK archive
       run: |
         echo Download and decompressing the SDK archive:
-        sudo apt-get update
-        sudo apt-get install gawk zlib1g libncurses5 g++ flex
         curl -SL https://downloads.openwrt.org/releases/19.07.3/targets/imx6/generic/openwrt-sdk-19.07.3-imx6_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz | tar xJ
         cd openwrt-sdk-19.07.3-imx6_gcc-7.5.0_musl_eabi.Linux-x86_64
         ./scripts/feeds update -a
