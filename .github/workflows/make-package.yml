@@ -42,7 +42,7 @@ jobs:
     - name: Git clone repo 2
       uses: actions/checkout@v2
       with:
-        repository: package/VOYAGER-LINUX
+        path: package/VOYAGER-LINUX
         
     - name: Compile
       run: |
