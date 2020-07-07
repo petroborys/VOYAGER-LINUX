@@ -9,7 +9,7 @@ on:
 jobs:
   build-opkg-package:
     
-    runs-on: ubuntu-18.4
+    runs-on: ubuntu-18.04
     
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
