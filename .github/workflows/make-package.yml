@@ -32,8 +32,8 @@ jobs:
         ./scripts/feeds update -a
         ./scripts/feeds install libmosquitto
         make defconfig
-        git clone https://github.com/petroborys/VOYAGER-LINUX.git package/VOYAGER-LINUX
-        ls -la
+        #git clone https://github.com/petroborys/VOYAGER-LINUX.git package/VOYAGER-LINUX
+        #ls -la
         
     - name: Git clone repo
       run: |
