@@ -54,11 +54,12 @@ jobs:
           git config --local user.name "GitHub Action"
           git add .
           git commit -am "Add test changes"
+          git push
 
-      - name: Checks-out repository
-        uses: actions/checkout@v2
-        with:
-          path: ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
+      #- name: Checks-out repository
+      #  uses: actions/checkout@v2
+      #  with:
+      #    path: ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
 
       - name: Compile OpenWrt project
         run: |
