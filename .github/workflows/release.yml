@@ -41,6 +41,22 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
+          
+      - name: Create local changes
+        run: |
+          cd ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
+          echo "Test v1.0.0" >> README.md
+          
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add README.md
+          git commit -m "Add test changes"
+      - name: Push changes
+        uses: petroborys/VOYAGER-LINUX@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Compile OpenWrt project
         run: |
