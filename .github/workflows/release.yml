@@ -55,8 +55,7 @@ jobs:
           git add .
           git commit -am "Automated report"
           git checkout master
-          #git push origin HEAD:master --force
-          git push
+          git push origin HEAD:master --force
 
       - name: Commit files
         run: |
