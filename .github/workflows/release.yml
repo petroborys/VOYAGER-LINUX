@@ -51,12 +51,9 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add README.md
+          git add .
           git commit -m "Add test changes"
-      - name: Push changes
-        uses: petroborys/VOYAGER-LINUX@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          git push
 
       - name: Compile OpenWrt project
         run: |
