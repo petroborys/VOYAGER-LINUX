@@ -54,7 +54,10 @@ jobs:
           git config --global user.email 'petroborys@gmail.com'
           git add .
           git commit -am "Automated report"
-          git push
+          git branch temp-branch
+          git checkout master
+          git merge temp-branch
+          git push origin master
 
       #- name: Checks-out repository
       #  uses: actions/checkout@v2
