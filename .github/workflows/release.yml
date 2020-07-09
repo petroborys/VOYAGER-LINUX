@@ -54,7 +54,7 @@ jobs:
           git config --local user.name "GitHub Action"
           git add .
           git commit -am "Add test changes"
-          git push
+          git push origin master
 
       #- name: Checks-out repository
       #  uses: actions/checkout@v2
