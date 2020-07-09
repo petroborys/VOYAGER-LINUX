@@ -54,14 +54,8 @@ jobs:
           git config --global user.email 'petroborys@gmail.com'
           git add .
           git commit -am "Automated report"
-          git checkout master
           git push origin HEAD:master --force
           #git push
-
-      - name: Commit files
-        run: |
-          cd ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
-          git push
 
       - name: Compile OpenWrt project
         run: |
