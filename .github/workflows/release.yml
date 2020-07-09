@@ -49,6 +49,7 @@ jobs:
           
       - name: Commit files
         run: |
+          cd ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
