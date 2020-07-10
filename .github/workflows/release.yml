@@ -45,7 +45,7 @@ jobs:
       - name: Create local changes
         run: |
           cd ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
-          echo "Test v1.0.0" >> README.md
+          sed -i 's/VER_TS = {".\..\.."}/VER_TS = {"1.1.1"}/' README.md
           
       - name: Commit files
         run: |
