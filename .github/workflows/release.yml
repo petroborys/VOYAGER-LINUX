@@ -42,13 +42,12 @@ jobs:
         with:
           path: ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
           
-      - name: Get version
-        run: echo "${GITHUB_REF#*/*/v}"
-          
       - name: Create local changes
         run: |
           cd ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
-          sed -i 's/VER_TS = {".\..\.."}/VER_TS = {"${GITHUB_REF#*/*/v}"}/' README.md
+          v="${GITHUB_REF#*/*/v}"
+          echo ${v}
+          sed -i 's/VER_TS = {".\..\.."}/VER_TS = {"${v}"}/' README.md
           
       - name: Commit files
         run: |
