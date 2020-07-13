@@ -3,7 +3,7 @@ include $(TOPDIR)/rules.mk
 # Name, version and release number
 # The name and version of your package are used to define the variable to point to the build directory of your package: $(PKG_BUILD_DIR)
 PKG_NAME:=VOYAGER-LINUX
-PKG_VERSION:=1.0.36
+PKG_VERSION:=1.0.37
 
 # Source settings (i.e. where to find the source codes)
 # This is a custom variable, used below
