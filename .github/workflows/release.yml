@@ -47,8 +47,8 @@ jobs:
           cd ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
           v="${GITHUB_REF#*/*/v}"
           echo ${v}
-          sed -i 's/VER_TS = {".\..\.."}/VER_TS = {"'${v}'"}/' README.md
-          sed -i 's/PKG_VERSION:=.\..\../PKG_VERSION:='${v}'/' Makefile
+          sed -i 's/VER_TS = {".*\..*\..*"}/VER_TS = {"'${v}'"}/' README.md
+          sed -i 's/PKG_VERSION:=.*\..*\..*/PKG_VERSION:='${v}'/' Makefile
           
       - name: Commit files
         run: |
