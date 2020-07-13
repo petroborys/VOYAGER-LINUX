@@ -43,7 +43,7 @@ jobs:
           path: ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
           
       - name: Get version
-        run: echo ${{ github.ref }}
+        run: echo ${{ github.ref#v }}
 
           
       - name: Create local changes
@@ -79,7 +79,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
+          tag_name: ${{ github.ref}}
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
