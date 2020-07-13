@@ -2,7 +2,7 @@ name: Release-package
 
 env:
   OPENWRT_SDK_DIR: "openwrt-sdk-19.07.3-imx6_gcc-7.5.0_musl_eabi.Linux-x86_64"
-  VERSION: "${GITHUB_REF#*/*/v}"
+  VERSION: ${GITHUB_REF#*/*/v}
 
 on:
   push:
