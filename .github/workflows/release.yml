@@ -2,6 +2,7 @@ name: Release-package
 
 env:
   OPENWRT_SDK_DIR: "openwrt-sdk-19.07.3-imx6_gcc-7.5.0_musl_eabi.Linux-x86_64"
+  VERSION: "${GITHUB_REF#*/*/v}"
 
 on:
   push:
@@ -49,7 +50,7 @@ jobs:
       - name: Create local changes
         run: |
           cd ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
-          sed -i 's/VER_TS = {".\..\.."}/VER_TS = {"1.1.1"}/' README.md
+          sed -i 's/VER_TS = {".\..\.."}/VER_TS = {"${{ env.VERSION}}"}/' README.md
           
       - name: Commit files
         run: |
