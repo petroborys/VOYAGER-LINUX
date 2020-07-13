@@ -44,7 +44,7 @@ jobs:
           path: ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
           
       - name: Get version
-        run: echo "${GITHUB_REF#*/*/v}"
+        run: echo ${{ env.VERSION}}
 
           
       - name: Create local changes
