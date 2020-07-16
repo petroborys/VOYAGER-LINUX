@@ -48,6 +48,8 @@ jobs:
           sed -i 's/VER_TS = {".*\..*\..*"}/VER_TS = {"'${v}'"}/' README.md
           sed -i 's/PKG_VERSION:=.*\..*\..*/PKG_VERSION:='${v}'/' Makefile
           sed -i 's/_MQTTTopic *= {"test"};/_MQTTTopic     = {"data"};/' README.md
+          cat README.md
+          cat Makefile
       - name: Compile OpenWrt project
         run: |
           cd ${{ env.OPENWRT_SDK_DIR}}
