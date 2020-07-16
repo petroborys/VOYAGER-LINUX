@@ -25,7 +25,6 @@ jobs:
           sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe"
           sudo apt-get update
           sudo apt-get install libncurses5-dev       
-
       - name: Preparing, configuring and building the necessary tools using a precompiled SDK
         run: |
           curl -SL https://downloads.openwrt.org/releases/19.07.3/targets/imx6/generic/${{ env.OPENWRT_SDK_DIR}}.tar.xz | tar xJ
@@ -33,21 +32,13 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install libmosquitto
           make defconfig
-
       - name: Create project dir
         run: mkdir ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checks-out repository
+        uses: actions/checkout@v2
         with:
           path: ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
-          tag_name: ${{ github.ref}}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
           
       - name: Create local changes
         run: |
@@ -57,7 +48,6 @@ jobs:
           sed -i 's/VER_TS = {".*\..*\..*"}/VER_TS = {"'${v}'"}/' README.md
           sed -i 's/PKG_VERSION:=.*\..*\..*/PKG_VERSION:='${v}'/' Makefile
           sed -i 's/_MQTTTopic *= {"test"};/_MQTTTopic     = {"data"};/' README.md
-
       - name: Compile OpenWrt project
         run: |
           cd ${{ env.OPENWRT_SDK_DIR}}
@@ -70,10 +60,19 @@ jobs:
       - name: Build project # This would actually build your project, using zip for an example artifact
         run: |
           zip --junk-paths VOYAGER-LINUX ${{ env.OPENWRT_SDK_DIR}}/bin/packages/arm_cortex-a9_neon/base/VOYAGER-LINUX_*
-
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref}}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
       - name: Upload Release Asset
         id: upload-release-asset 
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
