@@ -36,7 +36,7 @@ jobs:
         run: mkdir ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
 
       - name: Checks-out repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
           path: ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
           
@@ -66,6 +66,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          path: ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
           tag_name: ${{ github.ref}}
           release_name: Release ${{ github.ref }}
           draft: false
