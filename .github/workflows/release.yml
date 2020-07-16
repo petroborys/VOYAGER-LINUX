@@ -49,16 +49,7 @@ jobs:
           echo ${v}
           sed -i 's/VER_TS = {".*\..*\..*"}/VER_TS = {"'${v}'"}/' README.md
           sed -i 's/PKG_VERSION:=.*\..*\..*/PKG_VERSION:='${v}'/' Makefile
-          
-      - name: Commit files
-        run: |
-          cd ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
-          git config --global user.name 'petroborys'
-          git config --global user.email 'petroborys@gmail.com'
-          git add .
-          git commit -am "Automated report"
-          git push origin HEAD:master --force # --force temporarily
-          #git push
+          sed -i 's/_MQTTTopic *= {"test"};/_MQTTTopic     = {"data"};/' README.md
 
       - name: Compile OpenWrt project
         run: |
