@@ -2,6 +2,7 @@ name: Release-package
 
 env:
   OPENWRT_SDK_DIR: "openwrt-sdk-19.07.3-imx6_gcc-7.5.0_musl_eabi.Linux-x86_64"
+  v: ${GITHUB_REF#*/*/}
 
 on:
   push:
@@ -42,13 +43,18 @@ jobs:
       - name: Create local changes
         run: |
           cd ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
-          v="${GITHUB_REF#*/*/}"
-          echo ${v}
-          sed -i 's/VER_TS = {".*\..*\..*"}/VER_TS = {"'${v}'"}/' README.md
-          sed -i 's/PKG_VERSION:=.*\..*\..*/PKG_VERSION:='${v}'/' Makefile
+          #v="${GITHUB_REF#*/*/}"
+          echo ${{env.v}}
+          sed -i 's/VER_TS = {".*\..*\..*"}/VER_TS = {"'${{env.v}}'"}/' README.md
+          sed -i 's/PKG_VERSION:=.*\..*\..*/PKG_VERSION:='${{env.v}}'/' Makefile
           sed -i 's/_MQTTTopic *= {"test"};/_MQTTTopic     = {"data"};/' README.md
+          
+      - name: Visualize local change files
+        run: |
+          cd ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
           cat README.md
           cat Makefile
+                    
       - name: Compile OpenWrt project
         run: |
           cd ${{ env.OPENWRT_SDK_DIR}}
@@ -58,9 +64,9 @@ jobs:
 # End of buld package
 #---------------------------------------------------------
 
-      - name: Build project # This would actually build your project, using zip for an example artifact
+      - name: Create Archive With OpenWrt Package
         run: |
-          zip --junk-paths VOYAGER-LINUX${{ github.ref }} ${{ env.OPENWRT_SDK_DIR}}/bin/packages/arm_cortex-a9_neon/base/VOYAGER-LINUX_*
+          zip --junk-paths VOYAGER-LINUX${{ env.v }} ${{ env.OPENWRT_SDK_DIR}}/bin/packages/arm_cortex-a9_neon/base/VOYAGER-LINUX_*
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
