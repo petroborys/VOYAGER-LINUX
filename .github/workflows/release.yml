@@ -61,7 +61,8 @@ jobs:
 
       - name: Build project # This would actually build your project, using zip for an example artifact
         run: |
-          zip --junk-paths VOYAGER-LINUX ${{ env.OPENWRT_SDK_DIR}}/bin/packages/arm_cortex-a9_neon/base/VOYAGER-LINUX_*
+          #zip --junk-paths VOYAGER-LINUX ${{ env.OPENWRT_SDK_DIR}}/bin/packages/arm_cortex-a9_neon/base/VOYAGER-LINUX_*
+          zip --junk-paths VOYAGER-LINUX ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
