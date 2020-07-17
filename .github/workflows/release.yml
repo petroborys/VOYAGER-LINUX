@@ -43,7 +43,7 @@ jobs:
       - name: Create local changes
         run: |
           cd ${{ env.OPENWRT_SDK_DIR}}/package/VOYAGER-LINUX
-          #v="${GITHUB_REF#*/*/}"
+          ##v="${GITHUB_REF#*/*/}"
           echo ${{ env.VERSION }}
           sed -i 's/VER_TS = {".*\..*\..*"}/VER_TS = {"'${{ env.VERSION }}'"}/' README.md
           sed -i 's/PKG_VERSION:=.*\..*\..*/PKG_VERSION:='${{ env.VERSION }}'/' Makefile
