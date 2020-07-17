@@ -68,7 +68,7 @@ jobs:
 
       - name: Create Archive With OpenWrt Package
         run: |
-          zip --junk-paths VOYAGER-LINUX${{ env.VERSION }} ${{ env.OPENWRT_SDK_DIR}}/bin/packages/arm_cortex-a9_neon/base/VOYAGER-LINUX_*
+          zip --junk-paths VOYAGER-LINUX-${{ env.VERSION }} ${{ env.OPENWRT_SDK_DIR}}/bin/packages/arm_cortex-a9_neon/base/VOYAGER-LINUX_*
           ls -la
       - name: Create Release
         id: create_release
@@ -88,6 +88,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./VOYAGER-LINUX${{ env.VERSION }}.zip
-          asset_name: VOYAGER-LINUX${{ env.VERSION }}.zip
+          asset_path: ./VOYAGER-LINUX-env.VERSION.zip
+          asset_name: VOYAGER-LINUX-env.VERSION.zip
           asset_content_type: application/zip
