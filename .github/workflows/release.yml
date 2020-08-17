@@ -69,6 +69,7 @@ jobs:
       - name: Create Archive With OpenWrt Package
         run: |
           zip --junk-paths VOYAGER-LINUX ${{ env.OPENWRT_SDK_DIR}}/bin/packages/arm_cortex-a9_neon/base/VOYAGER-LINUX_*
+          zip -ur VOYAGER-LINUX.zip ${{ env.OPENWRT_SDK_DIR}}/bin/packages/arm_cortex-a9_neon/base/openssl-util*
           ls -la
       - name: Create Release
         id: create_release
